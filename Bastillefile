@@ -6,15 +6,11 @@ PKG zsh vim-console git-lite htop apache-solr curl
 MOUNT /usr/ports usr/ports nullfs ro 0 0 
 #MOUNT /werzel/mail var/mail nullfs rw 0 0
 #MOUNT /werzel/certificates www/certificates nullfs ro 0 0
-#MOUNT /werzel/server_config/clamav usr/local/etc/clamav nullfs ro 0 0
-#MOUNT /werzel/server_config/dovecot usr/local/etc/dovecot nullfs ro 0 0
-#MOUNT /werzel/server_config/redis usr/local/etc/redis nullfs ro 0 0
-#MOUNT /werzel/server_config/rspamd/local.d usr/local/etc/rspamd/local.d  nullfs ro 0 0
-#MOUNT /werzel/server_config/postfix usr/local/etc/postfix  nullfs ro 0 0
+MOUNT /werzel/server_config/solr usr/local/etc/git_config/solr nullfs ro 0 0
 
 # Link Configurations to /usr/local/etc/ from /usr/local/etc/git_config/*/
 #CMD rm -rf /usr/local/etc/redis.conf
-#CMD ln -s /usr/local/etc/redis.conf /usr/local/etc/git_config/redis/redis.conf
+#CMD ln -s /usr/local/etc/git_config/redis/redis.conf /usr/local/etc/redis.conf 
 
 # Prepare SOLr for Dovecot Collection
 CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
