@@ -12,9 +12,10 @@ MOUNT /werzel/server_config/solr usr/local/etc/git_config/solr nullfs ro 0 0
 SYSRC solr_enable=YES
 
 SERVICE solr start
-
+SERVICE solr restart
 # Prepare SOLr for Dovecot Collection
 CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
+# -p 8983
 # Link Configuration
 CMD rm /var/db/solr/dovecot/conf/managed-schema
 CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
@@ -22,4 +23,4 @@ CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/sol
 CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
 
 # Restart after rewrite
-SERVICE solr start
+SERVICE solr restart
