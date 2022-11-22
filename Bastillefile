@@ -15,8 +15,8 @@ MOUNT /werzel/server_config/solr usr/local/etc/git_config/solr nullfs ro 0 0
 # Prepare SOLr for Dovecot Collection
 CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
 CMD rm /var/db/solr/dovecot/conf/managed-schema
-CMD curl -o /var/db/solr/dovecot/conf/schema.xml https://www.c0ffee.net/files/schema.xml
-CMD curl -o /var/db/solr/dovecot/conf/solrconfig.xml https://www.c0ffee.net/files/solrconfig.xml
+CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
+CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
 CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
  
 SYSRC solr_enable=YES
