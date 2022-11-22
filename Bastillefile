@@ -8,18 +8,18 @@ MOUNT /usr/ports usr/ports nullfs ro 0 0
 #MOUNT /werzel/certificates www/certificates nullfs ro 0 0
 MOUNT /werzel/server_config/solr usr/local/etc/git_config/solr nullfs ro 0 0
 
-# Link Configurations to /usr/local/etc/ from /usr/local/etc/git_config/*/
-#CMD rm -rf /usr/local/etc/redis.conf
-#CMD ln -s /usr/local/etc/git_config/redis/redis.conf /usr/local/etc/redis.conf 
-
-# Prepare SOLr for Dovecot Collection
-CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
-CMD rm /var/db/solr/dovecot/conf/managed-schema
-CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
-CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
-CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
- 
+# Start service for manipulation
 SYSRC solr_enable=YES
 
 SERVICE solr start
 
+# Prepare SOLr for Dovecot Collection
+CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
+# Link Configuration
+CMD rm /var/db/solr/dovecot/conf/managed-schema
+CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
+CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
+CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
+
+# Restart after rewrite
+SERVICE solr start
