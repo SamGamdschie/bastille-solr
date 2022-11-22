@@ -1,4 +1,4 @@
-PKG zsh vim git-lite htop apache-solr
+PKG zsh htop apache-solr
 
 #CMD mkdir -p /www/certificates
 CMD mkdir -p /usr/local/etc/git_config/solr
