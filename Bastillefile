@@ -14,7 +14,7 @@ SYSRC solr_enable=YES
 SERVICE solr start
 SERVICE solr restart
 # Prepare SOLr for Dovecot Collection
-CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot"
+CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot -p 8983"
 # -p 8983
 # Link Configuration
 CMD rm /var/db/solr/dovecot/conf/managed-schema
