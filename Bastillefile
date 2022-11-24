@@ -3,8 +3,6 @@ PKG zsh htop apache-solr
 #CMD mkdir -p /www/certificates
 CMD mkdir -p /usr/local/etc/git_config/solr
 
-MOUNT /usr/ports usr/ports nullfs ro 0 0 
-#MOUNT /werzel/mail var/mail nullfs rw 0 0
 #MOUNT /werzel/certificates www/certificates nullfs ro 0 0
 MOUNT /werzel/server_config/solr usr/local/etc/git_config/solr nullfs ro 0 0
 
