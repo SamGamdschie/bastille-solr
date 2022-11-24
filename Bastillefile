@@ -19,10 +19,9 @@ CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot -p 8983
 CMD rm /var/db/solr/dovecot/conf/managed-schema
 CMD rm /var/db/solr/dovecot/conf/solrconfig.xml
 CMD rm /var/db/solr/dovecot/conf/schema.xml
-CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
-CMD ln -s /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
-# If adjustment is needed, the sechma and config must be copied instead..
-#CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
+CMD cp -a /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
+CMD cp -a /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
+CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
 
 # Restart after rewrite
 SERVICE solr restart
