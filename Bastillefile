@@ -1,4 +1,4 @@
-PKG zsh htop apache-solr
+PKG zsh htop apache-solr lsof
 
 #CMD mkdir -p /www/certificates
 CMD mkdir -p /usr/local/etc/git_config/solr
@@ -14,12 +14,14 @@ SERVICE solr start
 CMD su -m solr -c "/usr/local/solr/bin/solr create -c dovecot -n dovecot -p 8983"
 # -p 8983
 # Link Configuration
-CMD rm /var/db/solr/dovecot/conf/managed-schema
-CMD rm /var/db/solr/dovecot/conf/solrconfig.xml
-CMD rm /var/db/solr/dovecot/conf/schema.xml
+CMD rm -rf /var/db/solr/dovecot/conf/managed-schema
+CMD rm -rf /var/db/solr/dovecot/conf/solrconfig.xml
+CMD rm -rf /var/db/solr/dovecot/conf/schema.xml
 CMD cp -a /usr/local/etc/git_config/solr/dovecot/conf/schema.xml /var/db/solr/dovecot/conf/schema.xml
 CMD cp -a /usr/local/etc/git_config/solr/dovecot/conf/solrconfig.xml /var/db/solr/dovecot/conf/solrconfig.xml
-CMD chown solr:solr /var/db/solr/dovecot/conf/{schema,solrconfig}.xml
+CMD chown solr:solr /var/db/solr/dovecot/conf/schema.xml
+CMD chown solr:solr /var/db/solr/dovecot/conf/solrconfig.xml
 
 # Restart after rewrite
 SERVICE solr restart
+SERVICE solr status
